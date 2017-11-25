@@ -1,7 +1,6 @@
 require "csvpp/version"
 
 require 'json'
-require 'csv'
 
 require_relative 'csvpp/conversions'
 require_relative 'csvpp/format'

@@ -1,10 +1,12 @@
 {
-  "v1": {
-    "index": 0,
-    "type": "int"
-  },
-  "v2": {
-    "index": 1,
-    "type": "string"
+  "vars": {
+    "v1": {
+      "index": 0,
+      "type": "int"
+    },
+    "v2": {
+      "index": 1,
+      "type": "string"
+    }
   }
 }
