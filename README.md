@@ -29,6 +29,15 @@ CSVPP.parse(
 ) # => [{"v1"=>34, "line_number"=>1, "v2"=>"foobar"}, {"v1"=>99, "line_number"=>2, "v2"=>"hi  there"}]
 ```
 
+## Features
+
+- [x] Parse input that conforms to a format specified in a JSON file
+- [x] Type conversions
+- [ ] More validation options
+- [ ] JSON format file validator
+- [ ] Input file generator (useful for tests)
+- [ ] Report generator (as a single source of truth)
+
 ## Development
 
 After checking out the repo, run `bin/setup` to install dependencies. Then, run
