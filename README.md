@@ -22,7 +22,12 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+```ruby
+CSVPP.parse(
+  'test/sample_inputs/simple.txt',
+  format: 'test/sample_formats/simple.json'
+) # => [{"v1"=>34, "line_number"=>1, "v2"=>"foobar"}, {"v1"=>99, "line_number"=>2, "v2"=>"hi  there"}]
+```
 
 ## Development
 
