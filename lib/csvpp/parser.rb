@@ -32,7 +32,7 @@ module CSVPP
 
       File.open(path).each_line.with_index do |line, index|
         line_number = index + 1
-        columns = line.split(col_sep)
+        columns = line.split(col_sep, -1)
 
         hash = {}
         format.var_names.each do |var|
