@@ -18,7 +18,11 @@ module CSVPP
     end
 
     def index(var)
-      vars.fetch(var)['index']
+      position(var) - 1
+    end
+
+    def position(var)
+      vars.fetch(var)['position']
     end
 
     def type(var)

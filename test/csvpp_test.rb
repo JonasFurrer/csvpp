@@ -44,4 +44,25 @@ class CSVPPTest < Minitest::Test
     assert_equal "foobar", r1.v2
     assert_equal "hi  there", r2.v2
   end
+
+  def test_simple_json
+    json = CSVPP.json(
+      'test/sample_inputs/simple.txt',
+      format: 'test/sample_formats/simple.json'
+    )
+
+    assert_instance_of String, json
+
+    hash = JSON.parse(json)
+    r1, r2 = hash.fetch('vars')
+
+    assert_equal 34, r1['v1']
+    assert_equal 99, r2['v1']
+
+    assert_equal "foobar", r1['v2']
+    assert_equal "hi  there", r2['v2']
+
+    assert_equal 1, r1['line_number']
+    assert_equal 2, r2['line_number']
+  end
 end

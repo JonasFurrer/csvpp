@@ -1,11 +1,11 @@
 {
   "vars": {
     "v1": {
-      "index": 0,
+      "position": 1,
       "type": "int"
     },
     "v2": {
-      "index": 1,
+      "position": 2,
       "type": "string"
     }
   }
