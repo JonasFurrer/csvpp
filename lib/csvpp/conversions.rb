@@ -1,3 +1,5 @@
+require 'bigdecimal'
+
 module CSVPP
   module Conversions
     module_function
@@ -9,11 +11,19 @@ module CSVPP
     end
 
     def parse_string(str)
-      str.to_str
+      str.to_s
     end
 
     def parse_int(str)
-      str.to_str.to_i
+      str.to_s.to_i
+    end
+
+    def parse_float(str)
+      str.to_s.to_f
+    end
+
+    def parse_decimal(str)
+      BigDecimal(str.to_s)
     end
   end
 end

@@ -7,7 +7,7 @@ class CSVPPTest < Minitest::Test
 
   def test_simple_parse
     results = CSVPP.parse(
-      'test/sample_inputs/simple.txt',
+      input: 'test/sample_inputs/simple.txt',
       format: 'test/sample_formats/simple.json'
     )
 
@@ -27,7 +27,7 @@ class CSVPPTest < Minitest::Test
 
   def test_simple_parse_yielding_open_struct
     results = CSVPP.parse(
-      'test/sample_inputs/simple.txt',
+      input: 'test/sample_inputs/simple.txt',
       format: 'test/sample_formats/simple.json'
     ) { |attr| OpenStruct.new(attr) }
 
@@ -47,7 +47,7 @@ class CSVPPTest < Minitest::Test
 
   def test_simple_json
     json = CSVPP.json(
-      'test/sample_inputs/simple.txt',
+      input: 'test/sample_inputs/simple.txt',
       format: 'test/sample_formats/simple.json'
     )
 
