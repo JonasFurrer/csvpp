@@ -9,31 +9,23 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.1/css/bulma.min.css">
 
     <style type="text/css" media="all">
-      body, textarea {
+      html, body, textarea, button, input, select {
         font-family: monospace;
       }
     </style>
   </head>
+
   <body>
     <noscript>
       You need to enable JavaScript to run this app.
     </noscript>
 
     <section class="section">
+
       <div class="container is-fluid">
         <h1 class="title">CSV++</h1>
 
         <div class="columns">
-          <div class="column csvpp-format">
-            <div class="field">
-              <label class="label">Format</label>
-
-              <div class="control">
-                <textarea class="textarea" placeholder=""></textarea>
-              </div>
-            </div>
-          </div>
-
           <div class="column csvpp-input">
             <div class="field">
               <label class="label">Input</label>
@@ -43,25 +35,35 @@
               </div>
             </div>
           </div>
+        </div>
+
+        <div class="columns">
+          <div class="column csvpp-format">
+            <div class="field">
+              <label class="label">Format</label>
+
+              <div class="control">
+                <textarea class="textarea" placeholder="" rows="20"></textarea>
+              </div>
+            </div>
+          </div>
+
 
           <div class="column csvpp-output">
             <div class="field">
               <label class="label">Output</label>
 
               <div class="control">
-                <textarea class="textarea" placeholder=""></textarea>
+                <textarea class="textarea" placeholder="" rows="20"></textarea>
               </div>
             </div>
           </div>
-        </div>
 
-        <div class="field is-grouped is-grouped-right">
-          <div class="control">
-            <button class="button is-link">Submit</button>
-          </div>
         </div>
       </div>
+
     </section>
+
   </body>
 </html>
 
