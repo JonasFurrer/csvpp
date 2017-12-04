@@ -27,7 +27,8 @@ class App extends Component {
       "    }\n" +
       "  }\n" +
       "}\n",
-      output: ""
+      output: "",
+      outputClass: ""
     };
   }
 
@@ -36,7 +37,7 @@ class App extends Component {
     const format = document.querySelector(".csvpp-format textarea").value;
 
     if (input.length === 0 || format.length === 0) {
-      this.setState({output: ''});
+      this.setState({output: '', outputClass: ''});
       return;
     }
 
@@ -46,7 +47,7 @@ class App extends Component {
     })
       .then((response) => {
         const output = JSON.stringify(response.data, null, 2);
-        this.setState({output: output});
+        this.setState({output: output, outputClass: 'is-success'});
       });
   }
 
@@ -89,7 +90,8 @@ class App extends Component {
               <label className="label">Output</label>
 
               <div className="control">
-                <textarea className="textarea" value={this.state.output} rows="15" readOnly/>
+                <textarea className={this.state.outputClass + " textarea"} value={this.state.output} rows="15"
+                          readOnly/>
               </div>
             </div>
           </div>

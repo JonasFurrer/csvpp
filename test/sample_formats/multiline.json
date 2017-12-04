@@ -1,0 +1,28 @@
+{
+  "name": "bfs",
+  "multiline": "true",
+  "start": "MB",
+
+  "vars": {
+    "bur": {
+      "position": 2,
+      "line": "MB",
+      "type": "string"
+    },
+    "mbRecord": {
+      "position": 1,
+      "line": "MB",
+      "type": "string"
+    },
+    "someVar": {
+      "position": 3,
+      "line": "MN",
+      "type": "string"
+    },
+    "code": {
+      "position": 4,
+      "line": "MD",
+      "type": "string"
+    }
+  }
+}

@@ -1,9 +1,9 @@
 require 'oj'
 
-require 'csvpp/version'
-require 'csvpp/conversions'
-require 'csvpp/format'
-require 'csvpp/parser'
+require_relative './csvpp/version'
+require_relative './csvpp/conversions'
+require_relative './csvpp/format'
+require_relative './csvpp/parser'
 
 module CSVPP
 

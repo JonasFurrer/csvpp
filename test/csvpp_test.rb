@@ -92,4 +92,23 @@ class CSVPPTest < Minitest::Test
     assert_equal 2, r2['line_number']
   end
 
+  def test_multiline_parse
+    results = CSVPP.parse(
+      input: 'test/sample_inputs/multiline.txt',
+      format: 'test/sample_formats/multiline.json'
+    ) { |attr| OpenStruct.new(attr) }
+
+    assert_equal 6, results.count
+
+    results.each do |r|
+      assert_equal '71282018', r.bur
+      assert_equal 'MB', r.mbRecord
+    end
+
+    r1 = results.first
+    assert_nil r1.someVar
+
+    r5 = results[4]
+    assert_equal '1543', r5.someVar
+  end
 end
