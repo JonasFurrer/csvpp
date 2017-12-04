@@ -10,7 +10,7 @@ module CSVPP
     # @param json [String]
     # @return [Format]
     def self.load_from_str(json)
-      new JSON.parse(json)
+      new Oj.load(json)
     end
 
     # @param format [Hash]

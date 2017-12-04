@@ -79,7 +79,7 @@ class CSVPPTest < Minitest::Test
 
     assert_instance_of String, json
 
-    hash = JSON.parse(json)
+    hash = Oj.load(json)
     r1, r2 = hash.fetch('vars')
 
     assert_equal 34, r1['v1']

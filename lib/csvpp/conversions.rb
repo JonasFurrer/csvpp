@@ -25,5 +25,9 @@ module CSVPP
     def parse_decimal(str)
       BigDecimal(str.to_s)
     end
+
+    def parse_date(str)
+      Date.parse(str.to_s)
+    end
   end
 end

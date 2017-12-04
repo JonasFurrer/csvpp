@@ -1,4 +1,4 @@
-require 'json'
+require 'oj'
 
 require 'csvpp/version'
 require 'csvpp/conversions'
@@ -43,6 +43,7 @@ module CSVPP
   #
   # @return [String]
   def self.json(input:, format:, col_sep: DEFAULT_COL_SEP)
-    { vars: parse_str(input: input, format: format, col_sep: col_sep) }.to_json
+    h = { 'vars' => parse_str(input: input, format: format, col_sep: col_sep) }
+    Oj.dump(h)
   end
 end
