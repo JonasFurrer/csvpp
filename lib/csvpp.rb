@@ -1,10 +1,9 @@
-require "csvpp/version"
-
 require 'json'
 
-require_relative 'csvpp/conversions'
-require_relative 'csvpp/format'
-require_relative 'csvpp/parser'
+require 'csvpp/version'
+require 'csvpp/conversions'
+require 'csvpp/format'
+require 'csvpp/parser'
 
 module CSVPP
 
