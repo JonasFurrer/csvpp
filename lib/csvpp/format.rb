@@ -1,9 +1,14 @@
 module CSVPP
   class Format
+
+    # @param path [String] path to format file
+    # @return [Format]
     def self.load(path)
       load_from_str File.read(path)
     end
 
+    # @param json [String]
+    # @return [Format]
     def self.load_from_str(json)
       new JSON.parse(json)
     end

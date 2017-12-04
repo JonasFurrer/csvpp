@@ -3,9 +3,12 @@ require 'sinatra/base'
 module CSVPP
   class API < Sinatra::Base
     post '/parse' do
-      input_format = params['format']
+      content_type :json
+
+      format = params['format']
       input = params['input']
-      require 'pry'; binding.pry
+
+      CSVPP.json(input: input, format: format)
     end
   end
 end

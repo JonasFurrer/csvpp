@@ -4,6 +4,11 @@ module CSVPP
 
     attr_reader :format, :col_sep
 
+    # @param input [String] path to input file
+    # @param format [Format]
+    # @param col_sep [String]
+    #
+    # @return [Array<Object>]
     def self.parse(input:,
                    format:,
                    col_sep: DEFAULT_COL_SEP,
@@ -17,6 +22,24 @@ module CSVPP
       ).parse(input, &block)
     end
 
+    # @param input [String] input string
+    # @param format [Format]
+    # @param col_sep [String]
+    #
+    # @return [Array<Object>]
+    def self.parse_str(input:,
+                   format:,
+                   col_sep: DEFAULT_COL_SEP,
+                   convert_type: true,
+                   &block)
+
+      new(
+        format: format,
+        col_sep: col_sep,
+        convert_type: convert_type,
+      ).parse_str(input, &block)
+    end
+
     def initialize(format:, col_sep: DEFAULT_COL_SEP, convert_type: true)
       @format = format
       @col_sep = col_sep
@@ -28,9 +51,19 @@ module CSVPP
     end
 
     def parse(path, &block)
+      parse_io(File.open(path), &block)
+    end
+
+    def parse_str(str, &block)
+      parse_io(str, &block)
+    end
+
+    private
+
+    def parse_io(io, &block)
       results = []
 
-      File.open(path).each_line.with_index do |line, index|
+      io.each_line.with_index do |line, index|
         line_number = index + 1
         columns = line.split(col_sep, -1)
 
