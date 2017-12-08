@@ -9,10 +9,6 @@ option_parser = OptionParser.new do |opts|
     $options[:format] = format.strip
   end
 
-  opts.on('-i', '--input INPUT') do |input|
-    $options[:input] = input.strip
-  end
-
   opts.on_tail('-h', '--help', 'Show this message') do
     puts opts
     exit
@@ -22,11 +18,10 @@ end
 HELP = option_parser.help
 option_parser.parse!
 
-input = $options[:input]
 format = $options[:format]
 
 json = CSVPP.json(
-  input: File.read(input),
+  input: ARGF.read,
   format: File.read(format)
 )
 

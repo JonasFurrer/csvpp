@@ -2,16 +2,37 @@ module CSVPP
   class Format
     attr_reader :name
 
-    # @param path [String] path to format file
-    # @return [Format]
-    def self.load(path)
-      load_from_str File.read(path)
-    end
+    class << self
+      # @param name [String] unique name of the format
+      # @param format [Format]
+      def add(name, format)
+        store[name] = format
+      end
 
-    # @param json [String]
-    # @return [Format]
-    def self.load_from_str(json)
-      new Oj.load(json)
+      # @param name [String] unique name of the format
+      def find(name)
+        store.fetch(name)
+      end
+
+      # @param path [String] path to format file
+      # @return [Format]
+      def load(path)
+        load_from_str File.read(path)
+      end
+
+      # @param json [String]
+      # @return [Format]
+      def load_from_str(json)
+        new Oj.load(json)
+      end
+
+      def all
+        store.values
+      end
+
+      def store
+        @store ||= {}
+      end
     end
 
     # @param format [Hash]
