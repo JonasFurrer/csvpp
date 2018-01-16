@@ -72,6 +72,10 @@ module CSVPP
       vars.fetch(var)['type']
     end
 
+    def na(var)
+      vars.fetch(var)['na']
+    end
+
     def vars_for_line(line_id)
       vars_grouped_by_line.fetch(line_id)
     end
