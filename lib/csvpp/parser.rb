@@ -88,7 +88,8 @@ module CSVPP
 
       results = []
 
-      io.each_line.with_index do |line, index|
+      offset = offset(io)
+      skip(io.each_line, offset).with_index(offset) do |line, index|
         line_number = index + 1
         columns = line.split(col_sep, -1)
 
@@ -111,7 +112,8 @@ module CSVPP
       results = []
       hash = nil
 
-      io.each_line.with_index do |line, index|
+      offset = offset(io)
+      skip(io.each_line, offset).with_index(offset) do |line, index|
         line_number = index + 1
         columns = line.split(col_sep, -1)
         line_id = columns[0]
@@ -143,6 +145,15 @@ module CSVPP
 
     def multiline_start?(line_id)
       format.multiline_start?(line_id)
+    end
+
+    def skip(lines, offset)
+      offset.times { lines.next }
+      lines
+    end
+
+    def offset(io)
+      io.is_a?(String) ? 0 : format.skip
     end
   end
 end

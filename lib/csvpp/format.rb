@@ -1,6 +1,6 @@
 module CSVPP
   class Format
-    attr_reader :name
+    attr_reader :name, :skip
 
     class << self
       # @param name [String] unique name of the format
@@ -39,6 +39,7 @@ module CSVPP
     def initialize(format)
       @name = format['name']
       @multiline = format['multiline'].to_s.strip.downcase == 'true'
+      @skip = format['skip'].to_i
       @vars = format.fetch('vars')
 
       if multiline?
