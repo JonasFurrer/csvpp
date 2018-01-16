@@ -2,11 +2,17 @@
   "vars": {
     "v1": {
       "position": 1,
-      "type": "int"
+      "type": "int",
+      "na": -999
     },
     "v2": {
       "position": 2,
       "type": "string"
+    },
+    "v3": {
+      "position": 3,
+      "type": "float",
+      "na": "NA"
     }
   }
 }
