@@ -1,0 +1,13 @@
+{
+  "vars": {
+    "v1": {
+      "position": 1,
+      "type": "int"
+    },
+    "v2": {
+      "position": 2,
+      "type": "string"
+    }
+  },
+  "skip": 2
+}
