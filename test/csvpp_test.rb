@@ -17,7 +17,7 @@ class CSVPPTest < Minitest::Test
 
     assert_equal 34, r1['v1']
     assert_equal 99, r2['v1']
-    assert_equal nil, r3['v1']
+    assert_nil r3['v1']
 
     assert_equal "foobar", r1['v2']
     assert_equal "hi  there", r2['v2']
@@ -25,7 +25,7 @@ class CSVPPTest < Minitest::Test
 
     assert_equal 1.1, r1['v3']
     assert_equal 2.2, r2['v3']
-    assert r3['v3'].nan?
+    assert_nil r3['v3']
 
     assert_equal 1, r1['line_number']
     assert_equal 2, r2['line_number']
@@ -87,7 +87,7 @@ class CSVPPTest < Minitest::Test
 
     assert_equal 34, r1['v1']
     assert_equal 99, r2['v1']
-    assert_equal nil, r3['v1']
+    assert_nil r3['v1']
 
     assert_equal "foobar", r1['v2']
     assert_equal "hi  there", r2['v2']
@@ -95,7 +95,7 @@ class CSVPPTest < Minitest::Test
 
     assert_equal 1.1, r1['v3']
     assert_equal 2.2, r2['v3']
-    assert r3['v3'].nan?
+    assert_nil r3['v3']
 
     assert_equal 1, r1['line_number']
     assert_equal 2, r2['line_number']
@@ -137,16 +137,23 @@ class CSVPPTest < Minitest::Test
     assert_instance_of String, json
 
     hash = Oj.load(json)
-    r1, r2 = hash.fetch('vars')
+    r1, r2, r3 = hash.fetch('vars')
 
     assert_equal 34, r1['v1']
     assert_equal 99, r2['v1']
+    assert_nil r3['v1']
 
     assert_equal "foobar", r1['v2']
     assert_equal "hi  there", r2['v2']
+    assert_equal "Missing", r3['v2']
+
+    assert_equal 1.1, r1['v3']
+    assert_equal 2.2, r2['v3']
+    assert_nil r3['v3']
 
     assert_equal 1, r1['line_number']
     assert_equal 2, r2['line_number']
+    assert_equal 3, r3['line_number']
   end
 
   def test_multiline_parse

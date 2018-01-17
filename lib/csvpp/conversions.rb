@@ -6,9 +6,9 @@ module CSVPP
 
     # @param obj [Object]
     # @param to [String] a type, e.g. "int"
-    def convert(obj, to:, na: nil)
-      if obj == na.to_s  # obj is always a string, but na isn't necessarily
-        send("#{to}_na")
+    def convert(obj, to:, missings: [])
+      if missing?(obj, missings)
+        nil
       else
         send("parse_#{to}", obj)
       end
@@ -34,24 +34,8 @@ module CSVPP
       Date.parse(str.to_s)
     end
 
-    def string_na
-      ''
-    end
-
-    def date_na
-      ''
-    end
-
-    def int_na
-      nil # urghh
-    end
-
-    def float_na
-      Float::NAN
-    end
-
-    def decimal_na
-      BigDecimal::NAN
+    def missing?(obj, missings)
+      missings.map(&:to_s).include?(obj.to_s)
     end
   end
 end

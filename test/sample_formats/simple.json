@@ -3,7 +3,7 @@
     "v1": {
       "position": 1,
       "type": "int",
-      "na": -999
+      "missings": -999
     },
     "v2": {
       "position": 2,
@@ -12,7 +12,7 @@
     "v3": {
       "position": 3,
       "type": "float",
-      "na": "NA"
+      "missings": ["NA", "-", "gibsnet"]
     }
   }
 }

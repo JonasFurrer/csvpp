@@ -73,8 +73,15 @@ module CSVPP
       vars.fetch(var)['type']
     end
 
-    def na(var)
-      vars.fetch(var)['na']
+    # @param [String] var: name of the variable for which the missings are required
+    # @return [Array] an array of missing values, or nil, if no such array was defined
+    def missings(var)
+      m = vars.fetch(var)['missings']
+      if m.is_a?(Array)
+        m
+      else
+        [m]
+      end
     end
 
     def vars_for_line(line_id)
