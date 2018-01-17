@@ -144,12 +144,7 @@ module CSVPP
     def multiline_start?(line_id)
       format.multiline_start?(line_id)
     end
-
-    def skip(lines, offset)
-      offset.times { lines.next }
-      lines
-    end
-
+    
     # Yield each line and corresponding index of io to given block, but skipping
     # the first lines according to the skip parameter defined in format.
     def each_line_with_index(io, format)
