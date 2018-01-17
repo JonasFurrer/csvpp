@@ -6,6 +6,7 @@ module CSVPP
 
     # @param obj [Object]
     # @param to [String] a type, e.g. "int"
+    # @param missings [Array] list of values that are treated as missings, e.g. ['NA', '-', -999]
     def convert(obj, to:, missings: [])
       if missing?(obj, missings)
         nil
