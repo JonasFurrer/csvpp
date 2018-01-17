@@ -88,7 +88,7 @@ module CSVPP
 
       results = []
 
-      each_line_with_index(io, format) do |line, index|
+      each_line_with_index(io) do |line, index|
         line_number = index + 1
         columns = line.split(col_sep, -1)
 
@@ -111,7 +111,7 @@ module CSVPP
       results = []
       hash = nil
 
-      each_line_with_index(io, format) do |line, index|
+      each_line_with_index(io) do |line, index|
         line_number = index + 1
         columns = line.split(col_sep, -1)
         line_id = columns[0]
@@ -144,15 +144,13 @@ module CSVPP
     def multiline_start?(line_id)
       format.multiline_start?(line_id)
     end
-    
+
     # Yield each line and corresponding index of io to given block, but skipping
     # the first lines according to the skip parameter defined in format.
-    def each_line_with_index(io, format)
+    def each_line_with_index(io)
       offset = format.skip
-      index = 0
-      io.each_line do |line|
+      io.each_line.with_index do |line, index|
         yield(line, index) unless index < offset
-        index += 1
       end
     end
 
