@@ -88,6 +88,29 @@ class CSVPPTest < Minitest::Test
     assert_equal 2, r2['line_number']
   end
 
+  def test_simple_parse_str_with_skip
+    input_str  = File.read('test/sample_inputs/simple_with_skip.txt')
+    format_str = File.read('test/sample_formats/simple_with_skip.json')
+
+    results = CSVPP.parse_str(
+      input: input_str,
+      format: format_str
+    )
+
+    assert_equal 2, results.count
+
+    r1, r2 = results
+
+    assert_equal 34, r1['v1']
+    assert_equal 99, r2['v1']
+
+    assert_equal 'foobar', r1['v2']
+    assert_equal 'hi  there', r2['v2']
+
+    assert_equal 3, r1['line_number']
+    assert_equal 4, r2['line_number']
+  end
+
   def test_simple_json
     input_str = File.read('test/sample_inputs/simple.txt')
     format_str = File.read('test/sample_formats/simple.json')
