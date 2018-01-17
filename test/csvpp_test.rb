@@ -11,18 +11,25 @@ class CSVPPTest < Minitest::Test
       format: 'test/sample_formats/simple.json'
     )
 
-    assert_equal 2, results.count
+    assert_equal 3, results.count
 
-    r1, r2 = results
+    r1, r2, r3 = results
 
     assert_equal 34, r1['v1']
     assert_equal 99, r2['v1']
+    assert_nil r3['v1']
 
     assert_equal "foobar", r1['v2']
     assert_equal "hi  there", r2['v2']
+    assert_equal "Missing", r3['v2']
+
+    assert_equal 1.1, r1['v3']
+    assert_equal 2.2, r2['v3']
+    assert_nil r3['v3']
 
     assert_equal 1, r1['line_number']
     assert_equal 2, r2['line_number']
+    assert_equal 3, r3['line_number']
   end
 
   def test_simple_parse_with_skip
@@ -51,7 +58,7 @@ class CSVPPTest < Minitest::Test
       format: 'test/sample_formats/simple.json'
     ) { |attr| OpenStruct.new(attr) }
 
-    assert_equal 2, results.count
+    assert_equal 3, results.count
 
     r1, r2 = results
 
@@ -74,18 +81,25 @@ class CSVPPTest < Minitest::Test
       format: format_str
     )
 
-    assert_equal 2, results.count
+    assert_equal 3, results.count
 
-    r1, r2 = results
+    r1, r2, r3 = results
 
     assert_equal 34, r1['v1']
     assert_equal 99, r2['v1']
+    assert_nil r3['v1']
 
     assert_equal "foobar", r1['v2']
     assert_equal "hi  there", r2['v2']
+    assert_equal "Missing", r3['v2']
+
+    assert_equal 1.1, r1['v3']
+    assert_equal 2.2, r2['v3']
+    assert_nil r3['v3']
 
     assert_equal 1, r1['line_number']
     assert_equal 2, r2['line_number']
+    assert_equal 3, r3['line_number']
   end
 
   def test_simple_parse_str_with_skip
@@ -123,16 +137,23 @@ class CSVPPTest < Minitest::Test
     assert_instance_of String, json
 
     hash = Oj.load(json)
-    r1, r2 = hash.fetch('vars')
+    r1, r2, r3 = hash.fetch('vars')
 
     assert_equal 34, r1['v1']
     assert_equal 99, r2['v1']
+    assert_nil r3['v1']
 
     assert_equal "foobar", r1['v2']
     assert_equal "hi  there", r2['v2']
+    assert_equal "Missing", r3['v2']
+
+    assert_equal 1.1, r1['v3']
+    assert_equal 2.2, r2['v3']
+    assert_nil r3['v3']
 
     assert_equal 1, r1['line_number']
     assert_equal 2, r2['line_number']
+    assert_equal 3, r3['line_number']
   end
 
   def test_multiline_parse
