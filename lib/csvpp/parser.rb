@@ -154,8 +154,10 @@ module CSVPP
     # the first lines according to the skip parameter defined in format.
     def each_line_with_index(io, format)
       offset = format.skip
-      skip(io.each_line, offset).with_index(offset) do |line, index|
-        yield(line, index)
+      index = 0
+      io.each_line do |line|
+        yield(line, index) unless index < offset
+        index += 1
       end
     end
 
