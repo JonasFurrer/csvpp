@@ -6,12 +6,19 @@ module CSVPP
 
     # @param obj [Object]
     # @param to [String] a type, e.g. "int"
-    # @param missings [Array] list of values that are treated as missings, e.g. ['NA', '-', -999]
-    def convert(obj, to:, missings: [], true_values: [], false_values: [])
+    # @params options [Hashish] hash with optional keys:
+    #    missings: list of values that are treated as missings, e.g. ['NA', '-', -999]
+    #    true_values: list of values that are interpreted as `true` for a boolean variable
+    #    false_values: list of values that are interpreted as `false` for a boolean variable
+    # @return parsed value, read from `obj`, interpreted as type given by `to`
+    def convert(obj, to:, options: {})
+      missings = options[:missings] || []
       return nil if missing?(obj, missings)
 
       if to == 'boolean'
-        parse_boolean(obj, true_values, false_values)
+        trues  = options[:true_values] || []
+        falses = options[:false_values] || []
+        parse_boolean(obj, trues, falses)
       else
         send("parse_#{to}", obj)
       end

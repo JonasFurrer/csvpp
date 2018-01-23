@@ -4,11 +4,15 @@ module CSVPP
     
     def test_convert
       assert_equal 30000, Conversions.convert("030'000.32 mg", to: 'int')
-      assert_equal'snow', Conversions.convert('snow', to: 'string', missings: ['rain'])
+      assert_equal'snow', Conversions.convert('snow',
+                                                   to: 'string',
+                                                   options: { missings: ['rain'] })
     end
 
     def test_convert_missing
-      assert_nil Conversions.convert('-', to: 'float', missings: ['NA', '-'])
+      assert_nil Conversions.convert('-',
+                                     to: 'float',
+                                     options: { missings: ['NA', '-'] })
     end
 
     def test_parse_int
