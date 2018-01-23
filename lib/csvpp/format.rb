@@ -80,12 +80,12 @@ module CSVPP
     end
 
     def true_values(var)
-      return nil unless type(var) == "boolean"
+      return [] unless type(var) == "boolean"
       value_or_array_from(var, 'true_values')
     end
 
     def false_values(var)
-      return nil unless type(var) == "boolean"
+      return [] unless type(var) == "boolean"
       value_or_array_from(var, 'false_values')
     end
 
