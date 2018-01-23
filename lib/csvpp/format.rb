@@ -76,10 +76,17 @@ module CSVPP
     # @param var [String]: name of the variable for which the missings are required
     # @return [Array] an array of missing values (can be empty if no missings were defined)
     def missings(var)
-      m = vars.fetch(var)['missings']
-      return [] if m.nil?
-      return m  if m.is_a?(Array)
-      [m]
+      value_or_array_from(var, 'missings')
+    end
+
+    def true_values(var)
+      return nil unless type(var) == "boolean"
+      value_or_array_from(var, 'true_values')
+    end
+
+    def false_values(var)
+      return nil unless type(var) == "boolean"
+      value_or_array_from(var, 'false_values')
     end
 
     def vars_for_line(line_id)
@@ -95,6 +102,13 @@ module CSVPP
     end
 
     private
+
+    def value_or_array_from(var, attribute)
+      value = vars.fetch(var)[attribute]
+      return [] if value.nil?
+      return value if value.is_a?(Array)
+      [value]
+    end
 
     attr_reader :vars, :vars_grouped_by_line, :multiline_start
   end

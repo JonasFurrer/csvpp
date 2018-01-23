@@ -7,9 +7,11 @@ module CSVPP
     # @param obj [Object]
     # @param to [String] a type, e.g. "int"
     # @param missings [Array] list of values that are treated as missings, e.g. ['NA', '-', -999]
-    def convert(obj, to:, missings: [])
-      if missing?(obj, missings)
-        nil
+    def convert(obj, to:, missings: [], true_values: [], false_values: [])
+      return nil if missing?(obj, missings)
+
+      if to == 'boolean'
+        parse_boolean(obj, true_values, false_values)
       else
         send("parse_#{to}", obj)
       end
@@ -55,6 +57,18 @@ module CSVPP
 
     def parse_date(str)
       Date.parse(str.to_s)
+    end
+
+    def parse_boolean(str, true_values = [], false_values = [])
+      cleaned = str.to_s.strip.downcase
+
+      trues = true_values.empty? ? ['1', 't', 'true'] : true_values.map(&:to_s).map(&:downcase)
+      return true  if trues.include? cleaned
+
+      falses = false_values.empty? ? ['0', 'f', 'false'] : false_values.map(&:to_s).map(&:downcase)
+      return false if falses.include? cleaned
+
+      nil
     end
 
     def missing?(obj, missings)

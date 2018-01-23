@@ -71,7 +71,11 @@ module CSVPP
         type = format.type(var)
         return if type.nil?
 
-        hash[var] = convert(value, to: type, missings: format.missings(var))
+        hash[var] = convert(value,
+                            to: type,
+                            missings: format.missings(var),
+                            true_values: format.true_values(var),
+                            false_values: format.false_values(var))
       end
     end
 
