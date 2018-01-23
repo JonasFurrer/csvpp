@@ -62,10 +62,18 @@ module CSVPP
     def parse_boolean(str, true_values = [], false_values = [])
       cleaned = str.to_s.strip.downcase
 
-      trues = true_values.empty? ? ['1', 't', 'true'] : true_values.map(&:to_s).map(&:downcase)
-      return true  if trues.include? cleaned
+      trues = if true_values.empty?
+                ['1', 't', 'true']
+              else
+                true_values.map(&:to_s).map(&:downcase)
+              end
+      return true if trues.include? cleaned
 
-      falses = false_values.empty? ? ['0', 'f', 'false'] : false_values.map(&:to_s).map(&:downcase)
+      falses = if false_values.empty?
+                 ['0', 'f', 'false']
+               else
+                 false_values.map(&:to_s).map(&:downcase)
+               end
       return false if falses.include? cleaned
 
       nil
