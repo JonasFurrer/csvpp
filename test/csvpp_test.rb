@@ -27,6 +27,10 @@ class CSVPPTest < Minitest::Test
     assert_equal 2.2, r2['v3']
     assert_nil r3['v3']
 
+    assert_equal(false, r1['v4'])
+    assert_equal(true, r2['v4'])
+    assert_equal(true, r3['v4'])
+
     assert_equal 1, r1['line_number']
     assert_equal 2, r2['line_number']
     assert_equal 3, r3['line_number']
@@ -96,6 +100,10 @@ class CSVPPTest < Minitest::Test
     assert_equal 1.1, r1['v3']
     assert_equal 2.2, r2['v3']
     assert_nil r3['v3']
+
+    assert_equal(false, r1['v4'])
+    assert_equal(true, r2['v4'])
+    assert_equal(true, r3['v4'])
 
     assert_equal 1, r1['line_number']
     assert_equal 2, r2['line_number']

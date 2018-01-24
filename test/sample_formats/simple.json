@@ -13,6 +13,11 @@
       "position": 3,
       "type": "float",
       "missings": ["NA", "-", "gibsnet"]
+    },
+    "v4": {
+      "position": 4,
+      "type": "boolean",
+      "true_values": ["JA", "korrektos", 100]
     }
   }
 }
