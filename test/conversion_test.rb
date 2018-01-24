@@ -6,13 +6,13 @@ module CSVPP
       assert_equal 30000, Conversions.convert("030'000.32 mg", to: 'int')
       assert_equal'snow', Conversions.convert('snow',
                                                    to: 'string',
-                                                   options: { missings: ['rain'] })
+                                                   missings: ['rain'] )
     end
 
     def test_convert_missing
       assert_nil Conversions.convert('-',
                                      to: 'float',
-                                     options: { missings: ['NA', '-'] })
+                                     missings: ['NA', '-'] )
     end
 
     def test_parse_int
@@ -104,13 +104,13 @@ module CSVPP
     end
 
     def test_parse_boolean_with_true_and_false_values
-      assert_equal(true, Conversions.parse_boolean('durchaus', [true, 'durchaus', 'YES']))
-      assert_equal(true, Conversions.parse_boolean(100, [100, 'durchaus', 'YES']))
-      assert_equal(nil, Conversions.parse_boolean(true, ['durchaus', 'YES']))
-      assert_equal(nil, Conversions.parse_boolean('durchaus!', [], []))
+      assert_equal(true, Conversions.parse_boolean('durchaus', true_values: [true, 'durchaus', 'YES']))
+      assert_equal(true, Conversions.parse_boolean(100, true_values: [100, 'durchaus', 'YES']))
+      assert_equal(nil, Conversions.parse_boolean(true, true_values: ['durchaus', 'YES']))
+      assert_equal(nil, Conversions.parse_boolean('durchaus!', true_values: [], false_values: []))
       assert_equal(false, Conversions.parse_boolean(false))
-      assert_equal(false, Conversions.parse_boolean(false, [], [false, 'Nein']))
-      assert_equal(false, Conversions.parse_boolean('Nein', [], [false, 'Nein']))
+      assert_equal(false, Conversions.parse_boolean(false, true_values: [], false_values: [false, 'Nein']))
+      assert_equal(false, Conversions.parse_boolean('Nein', true_values: [], false_values: [false, 'Nein']))
     end
   end
 

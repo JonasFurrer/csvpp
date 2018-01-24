@@ -4,31 +4,22 @@ module CSVPP
   module Conversions
     module_function
 
-    # @param obj [Object]
+    # @param obj [Object] object to parse
     # @param to [String] a type, e.g. "int"
-    # @params options [Hashish] hash with optional keys:
-    #    missings: list of values that are treated as missings, e.g. ['NA', '-', -999]
-    #    true_values: list of values that are interpreted as `true` for a boolean variable
-    #    false_values: list of values that are interpreted as `false` for a boolean variable
+    # @missings [Array] list of values that are treated as missings, e.g. ['NA', '-', -999]
+    # @params options [Hash] options passed on to parsing methods for specific types
     # @return parsed value, read from `obj`, interpreted as type given by `to`
-    def convert(obj, to:, options: {})
-      missings = options[:missings] || []
+    def convert(obj, to:, missings: [], **options)
       return nil if missing?(obj, missings)
 
-      if to == 'boolean'
-        trues  = options[:true_values] || []
-        falses = options[:false_values] || []
-        parse_boolean(obj, trues, falses)
-      else
-        send("parse_#{to}", obj)
-      end
+      send("parse_#{to}", obj, **options)
     end
 
-    def parse_string(str)
+    def parse_string(str, **options)
       str.to_s
     end
 
-    def parse_int(str)
+    def parse_int(str, **options)
       return nil if str.to_s.empty?
 
       cleaned = if str.is_a?(String)
@@ -44,7 +35,7 @@ module CSVPP
       Integer(cleaned) rescue nil
     end
 
-    def parse_float(str)
+    def parse_float(str, **options)
       return nil if str.to_s.empty?
       Float(clean_decimal(str)) rescue nil
     end
@@ -62,11 +53,15 @@ module CSVPP
 
     end
 
-    def parse_date(str)
+    def parse_date(str, **options)
       Date.parse(str.to_s)
     end
 
-    def parse_boolean(str, true_values = [], false_values = [])
+    # @param true_values [Array]: list of values that are interpreted as `true`
+    # @param false_values [Array]: list of values that are interpreted as `false`
+    # @return true or false, or
+    #      nil if `str` doesn't match any value interpreted as `true` or `false`
+    def parse_boolean(str, true_values: [], false_values: [])
       cleaned = str.to_s.strip.downcase
 
       trues = if true_values.empty?

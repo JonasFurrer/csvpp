@@ -73,9 +73,9 @@ module CSVPP
 
         hash[var] = convert(value,
                             to: type,
-                            options: { missings: format.missings(var),
-                                       true_values: format.true_values(var),
-                                       false_values: format.false_values(var) })
+                            missings: format.missings(var),
+                            true_values: format.true_values(var),
+                            false_values: format.false_values(var))
       end
     end
 
