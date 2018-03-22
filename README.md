@@ -14,11 +14,15 @@ gem 'csvpp'
 
 And then execute:
 
-    $ bundle
+```
+$ bundle
+```
 
 Or install it yourself as:
 
-    $ gem install csvpp
+```
+$ gem install csvpp
+```
 
 ## Usage
 
@@ -27,6 +31,41 @@ CSVPP.parse(
   input: 'test/sample_inputs/simple.txt',
   format: 'test/sample_formats/simple.json'
 ) # => [{"v1"=>34, "line_number"=>1, "v2"=>"foobar"}, {"v1"=>99, "line_number"=>2, "v2"=>"hi  there"}]
+```
+
+### CLI
+
+CSV++ comes with a CLI. To print a JSON representation of an input file, pass a
+file argument and provide a format specification file with `-f`, e.g.:
+
+```
+$ csvpp test/sample_inputs/simple.txt -f test/sample_formats/simple.json
+
+{
+    "vars": [
+        {
+            "line_number": 1,
+            "v1": 34,
+            "v2": "foobar",
+            "v3": 1.1,
+            "v4": false
+        },
+        {
+            "line_number": 2,
+            "v1": 99,
+            "v2": "hi  there",
+            "v3": 2.2,
+            "v4": true
+        },
+        {
+            "line_number": 3,
+            "v1": null,
+            "v2": "Missing",
+            "v3": null,
+            "v4": true
+        }
+    ]
+}
 ```
 
 ## Development
